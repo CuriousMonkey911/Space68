@@ -1,24 +1,38 @@
 package com.example.space68;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.widget.Button;
 
-import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.graphics.Insets;
-import androidx.core.view.ViewCompat;
-import androidx.core.view.WindowInsetsCompat;
+
+import com.example.space68.ui.QuartersActivity;
+import com.example.space68.ui.SimulatorActivity;
+import com.example.space68.ui.MissionControlActivity;
+import com.example.space68.ui.RecruitActivity;
 
 public class MainActivity extends AppCompatActivity {
 
-    @Overrides
+    @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        EdgeToEdge.enable(this);
         setContentView(R.layout.activity_main);
-        ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main), (v, insets) -> {
-            Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
-            v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
-            return insets;
-        });
+
+        Button btnRecruit = findViewById(R.id.btnRecruit);
+        Button btnQuarters = findViewById(R.id.btnQuarters);
+        Button btnSimulator = findViewById(R.id.btnSimulator);
+        Button btnMissionControl = findViewById(R.id.btnMissionControl);
+
+        btnRecruit.setOnClickListener(v ->
+                startActivity(new Intent(this, RecruitActivity.class)));
+
+        btnQuarters.setOnClickListener(v ->
+                startActivity(new Intent(this, QuartersActivity.class)));
+
+        btnSimulator.setOnClickListener(v ->
+                startActivity(new Intent(this, SimulatorActivity.class)));
+
+        btnMissionControl.setOnClickListener(v ->
+                startActivity(new Intent(this, MissionControlActivity.class)));
     }
 }

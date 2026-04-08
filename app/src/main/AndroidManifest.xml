@@ -12,6 +12,18 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Space68">
         <activity
+            android:name=".ui.MissionControlActivity"
+            android:exported="false" />
+        <activity
+            android:name=".ui.SimulatorActivity"
+            android:exported="false" />
+        <activity
+            android:name=".ui.QuartersActivity"
+            android:exported="false" />
+        <activity
+            android:name=".ui.RecruitActivity"
+            android:exported="false" />
+        <activity
             android:name=".MainActivity"
             android:exported="true">
             <intent-filter>
