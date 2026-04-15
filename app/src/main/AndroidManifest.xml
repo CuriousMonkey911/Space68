@@ -12,6 +12,12 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Space68">
         <activity
+            android:name=".ui.CasinoActivity"
+            android:exported="false" />
+        <activity
+            android:name=".ui.StatisticsActivity"
+            android:exported="false" />
+        <activity
             android:name=".ui.MissionControlActivity"
             android:exported="false" />
         <activity

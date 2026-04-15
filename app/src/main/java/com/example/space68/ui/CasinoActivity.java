@@ -2,6 +2,7 @@ package com.example.space68.ui;
 
 import android.os.Bundle;
 import android.widget.Button;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -9,30 +10,33 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.space68.R;
+import com.example.space68.data.CasinoManager;
 import com.example.space68.data.Location;
 import com.example.space68.data.Storage;
 import com.example.space68.model.CrewMember;
 
 import java.util.List;
 
-public class SimulatorActivity extends AppCompatActivity {
+public class CasinoActivity extends AppCompatActivity {
 
     private CrewAdapter adapter;
+    private TextView textResult;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_simulator);
+        setContentView(R.layout.activity_casino);
 
         RecyclerView recycler = findViewById(R.id.recyclerCrew);
-        Button btnTrain = findViewById(R.id.btnTrain);
+        Button btnGamble = findViewById(R.id.btnGamble);
         Button btnToQuarters = findViewById(R.id.btnToQuarters);
+        textResult = findViewById(R.id.textResult);
 
         recycler.setLayoutManager(new LinearLayoutManager(this));
-        adapter = new CrewAdapter(Storage.getInstance().getCrewByLocation(Location.SIMULATOR));
+        adapter = new CrewAdapter(Storage.getInstance().getCrewByLocation(Location.CASINO));
         recycler.setAdapter(adapter);
 
-        btnTrain.setOnClickListener(v -> trainSelected());
+        btnGamble.setOnClickListener(v -> gambleSelected());
         btnToQuarters.setOnClickListener(v -> moveSelectedToQuarters());
     }
 
@@ -43,22 +47,27 @@ public class SimulatorActivity extends AppCompatActivity {
     }
 
     private void refreshList() {
-        List<CrewMember> crew = Storage.getInstance().getCrewByLocation(Location.SIMULATOR);
+        List<CrewMember> crew = Storage.getInstance().getCrewByLocation(Location.CASINO);
         adapter.updateData(crew);
     }
 
-    // adds 1 XP to each selected crew member
-    private void trainSelected() {
+    private void gambleSelected() {
         List<CrewMember> selected = adapter.getSelectedCrew();
         if (selected.isEmpty()) {
             Toast.makeText(this, "Select crew first", Toast.LENGTH_SHORT).show();
             return;
         }
+        StringBuilder sb = new StringBuilder();
         for (CrewMember cm : selected) {
-            cm.gainExperience(1);
-            cm.recordTraining();
+            CasinoManager.Result result = CasinoManager.gamble(cm);
+            sb.append(cm.getName()).append(": ");
+            switch (result) {
+                case WIN: sb.append("DOUBLED XP! Now ").append(cm.getExperience()).append("\n"); break;
+                case LOSE: sb.append("LOST HALF! Now ").append(cm.getExperience()).append("\n"); break;
+                case NO_XP: sb.append("no XP to gamble\n"); break;
+            }
         }
-        Toast.makeText(this, "Trained " + selected.size() + " crew", Toast.LENGTH_SHORT).show();
+        textResult.setText(sb.toString());
         refreshList();
     }
 
@@ -71,7 +80,6 @@ public class SimulatorActivity extends AppCompatActivity {
         for (CrewMember cm : selected) {
             Storage.getInstance().moveCrew(cm, Location.QUARTERS);
         }
-        Toast.makeText(this, "Sent " + selected.size() + " to quarters", Toast.LENGTH_SHORT).show();
         refreshList();
     }
 }

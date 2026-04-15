@@ -1,10 +1,82 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/main"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ui.RecruitActivity">
+    android:orientation="vertical"
+    android:padding="24dp">
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Recruit Crew Member"
+        android:textSize="24sp"
+        android:textStyle="bold"
+        android:layout_marginBottom="24dp" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Name:"
+        android:textSize="16sp" />
+
+    <EditText
+        android:id="@+id/editName"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Enter name"
+        android:inputType="text"
+        android:layout_marginBottom="24dp" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Specialization:"
+        android:textSize="16sp"
+        android:layout_marginBottom="8dp" />
+
+    <RadioGroup
+        android:id="@+id/radioGroupSpec"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="24dp">
+
+        <RadioButton
+            android:id="@+id/radioPilot"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Pilot (skill 5, res 4, energy 20)"
+            android:checked="true" />
+
+        <RadioButton
+            android:id="@+id/radioEngineer"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Engineer (skill 6, res 3, energy 19)" />
+
+        <RadioButton
+            android:id="@+id/radioMedic"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Medic (skill 7, res 2, energy 18)" />
+
+        <RadioButton
+            android:id="@+id/radioScientist"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Scientist (skill 8, res 1, energy 17)" />
+
+        <RadioButton
+            android:id="@+id/radioSoldier"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Soldier (skill 9, res 0, energy 16)" />
+
+    </RadioGroup>
+
+    <Button
+        android:id="@+id/btnCreate"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Create" />
+
+</LinearLayout>
