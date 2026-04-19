@@ -45,20 +45,19 @@ public class CrewAdapter extends RecyclerView.Adapter<CrewAdapter.CrewViewHolder
                         "  Energy: " + cm.getEnergy() + "/" + cm.getMaxEnergy()
         );
 
-        // highlight selected rows
-        holder.itemView.setSelected(selectedPositions.contains(position));
-        holder.itemView.setBackgroundColor(
-                selectedPositions.contains(position) ? 0x3300BFFF : 0x00000000
+        androidx.cardview.widget.CardView card = (androidx.cardview.widget.CardView) holder.itemView;
+        card.setCardBackgroundColor(
+                selectedPositions.contains(position) ? 0xFF2D1B6B : 0xFF13132A
         );
 
-        // tap to toggle selection
         holder.itemView.setOnClickListener(v -> {
-            if (selectedPositions.contains(position)) {
-                selectedPositions.remove(position);
+            int pos = holder.getAdapterPosition();
+            if (selectedPositions.contains(pos)) {
+                selectedPositions.remove(pos);
             } else {
-                selectedPositions.add(position);
+                selectedPositions.add(pos);
             }
-            notifyItemChanged(position);
+            notifyItemChanged(pos);
         });
     }
 

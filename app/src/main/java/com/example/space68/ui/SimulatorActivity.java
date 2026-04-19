@@ -1,10 +1,10 @@
 package com.example.space68.ui;
 
 import android.os.Bundle;
-import android.widget.Button;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -25,8 +25,8 @@ public class SimulatorActivity extends AppCompatActivity {
         setContentView(R.layout.activity_simulator);
 
         RecyclerView recycler = findViewById(R.id.recyclerCrew);
-        Button btnTrain = findViewById(R.id.btnTrain);
-        Button btnToQuarters = findViewById(R.id.btnToQuarters);
+        CardView btnTrain = findViewById(R.id.btnTrain);
+        CardView btnToQuarters = findViewById(R.id.btnToQuarters);
 
         recycler.setLayoutManager(new LinearLayoutManager(this));
         adapter = new CrewAdapter(Storage.getInstance().getCrewByLocation(Location.SIMULATOR));
@@ -47,7 +47,6 @@ public class SimulatorActivity extends AppCompatActivity {
         adapter.updateData(crew);
     }
 
-    // adds 1 XP to each selected crew member
     private void trainSelected() {
         List<CrewMember> selected = adapter.getSelectedCrew();
         if (selected.isEmpty()) {

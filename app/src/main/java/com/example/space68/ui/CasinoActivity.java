@@ -1,11 +1,11 @@
 package com.example.space68.ui;
 
 import android.os.Bundle;
-import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -28,8 +28,8 @@ public class CasinoActivity extends AppCompatActivity {
         setContentView(R.layout.activity_casino);
 
         RecyclerView recycler = findViewById(R.id.recyclerCrew);
-        Button btnGamble = findViewById(R.id.btnGamble);
-        Button btnToQuarters = findViewById(R.id.btnToQuarters);
+        CardView btnGamble = findViewById(R.id.btnGamble);
+        CardView btnToQuarters = findViewById(R.id.btnToQuarters);
         textResult = findViewById(R.id.textResult);
 
         recycler.setLayoutManager(new LinearLayoutManager(this));

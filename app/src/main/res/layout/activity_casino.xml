@@ -3,51 +3,108 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:padding="16dp">
+    android:background="#0A0A1A"
+    android:padding="24dp">
 
-    <TextView
-        android:layout_width="wrap_content"
+    <!-- Header -->
+    <LinearLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Space Casino"
-        android:textSize="24sp"
-        android:textStyle="bold"
-        android:layout_marginBottom="4dp" />
+        android:orientation="vertical"
+        android:paddingTop="16dp"
+        android:paddingBottom="24dp">
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Gamble crew XP — 50% double, 50% lose half"
-        android:textSize="14sp"
-        android:layout_marginBottom="12dp" />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Space Casino"
+            android:textSize="32sp"
+            android:textStyle="bold"
+            android:textColor="#FFFFFF"
+            android:letterSpacing="0.05" />
 
+        <View
+            android:layout_width="48dp"
+            android:layout_height="2dp"
+            android:background="#7C5CBF"
+            android:layout_marginTop="8dp"
+            android:layout_marginBottom="8dp" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Gamble crew XP — 50% double, 50% lose half"
+            android:textSize="13sp"
+            android:textColor="#8888AA" />
+
+    </LinearLayout>
+
+    <!-- Crew List -->
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recyclerCrew"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="1" />
 
-    <Button
-        android:id="@+id/btnGamble"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Gamble Selected"
-        android:layout_marginTop="8dp" />
-
-    <Button
-        android:id="@+id/btnToQuarters"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Move to Quarters"
-        android:layout_marginTop="8dp" />
-
+    <!-- Result box -->
     <TextView
         android:id="@+id/textResult"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:textSize="14sp"
+        android:textSize="13sp"
+        android:textColor="#FFFFFF"
         android:textStyle="bold"
+        android:layout_marginTop="16dp"
+        android:padding="12dp"
+        android:background="@drawable/result_box_bg" />
+
+    <!-- Buttons -->
+    <androidx.cardview.widget.CardView
+        android:id="@+id/btnGamble"
+        android:layout_width="match_parent"
+        android:layout_height="52dp"
         android:layout_marginTop="12dp"
-        android:padding="8dp"
-        android:background="#11000000" />
+        android:clickable="true"
+        android:focusable="true"
+        android:foreground="?attr/selectableItemBackground"
+        app:cardBackgroundColor="#2D1B6B"
+        app:cardCornerRadius="12dp"
+        app:cardElevation="0dp"
+        xmlns:app="http://schemas.android.com/apk/res-auto">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:text="Gamble Selected"
+            android:textColor="#FFFFFF"
+            android:textSize="14sp"
+            android:textStyle="bold"
+            android:gravity="center" />
+
+    </androidx.cardview.widget.CardView>
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/btnToQuarters"
+        android:layout_width="match_parent"
+        android:layout_height="52dp"
+        android:layout_marginTop="10dp"
+        android:clickable="true"
+        android:focusable="true"
+        android:foreground="?attr/selectableItemBackground"
+        app:cardBackgroundColor="#13132A"
+        app:cardCornerRadius="12dp"
+        app:cardElevation="0dp"
+        xmlns:app="http://schemas.android.com/apk/res-auto">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:text="Move to Quarters"
+            android:textColor="#8888AA"
+            android:textSize="14sp"
+            android:textStyle="bold"
+            android:gravity="center" />
+
+    </androidx.cardview.widget.CardView>
 
 </LinearLayout>

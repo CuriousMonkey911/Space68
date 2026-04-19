@@ -1,10 +1,10 @@
 package com.example.space68.ui;
 
 import android.os.Bundle;
-import android.widget.Button;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -25,22 +25,19 @@ public class QuartersActivity extends AppCompatActivity {
         setContentView(R.layout.activity_quarters);
 
         RecyclerView recycler = findViewById(R.id.recyclerCrew);
-        Button btnToSim = findViewById(R.id.btnToSimulator);
-        Button btnToMission = findViewById(R.id.btnToMissionControl);
+        CardView btnToSim = findViewById(R.id.btnToSimulator);
+        CardView btnToMission = findViewById(R.id.btnToMissionControl);
+        CardView btnToCasino = findViewById(R.id.btnToCasino);
 
-        // set up RecyclerView
         recycler.setLayoutManager(new LinearLayoutManager(this));
         adapter = new CrewAdapter(Storage.getInstance().getCrewByLocation(Location.QUARTERS));
         recycler.setAdapter(adapter);
 
         btnToSim.setOnClickListener(v -> moveSelectedTo(Location.SIMULATOR));
         btnToMission.setOnClickListener(v -> moveSelectedTo(Location.MISSION_CONTROL));
-
-        Button btnToCasino = findViewById(R.id.btnToCasino);
         btnToCasino.setOnClickListener(v -> moveSelectedTo(Location.CASINO));
     }
 
-    // refresh list whenever we come back to this screen
     @Override
     protected void onResume() {
         super.onResume();

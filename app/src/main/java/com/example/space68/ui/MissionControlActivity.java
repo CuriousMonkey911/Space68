@@ -2,13 +2,13 @@ package com.example.space68.ui;
 
 import android.os.Bundle;
 import android.view.View;
-import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.ScrollView;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -29,20 +29,18 @@ public class MissionControlActivity extends AppCompatActivity {
     private LinearLayout selectionPanel, combatPanel;
     private TextView textThreat, textCrewA, textCrewB, textCurrentTurn, textLog;
     private ScrollView scrollLog;
-    private Button btnAttack, btnDefend, btnSpecial, btnEndMission;
+    private CardView btnAttack, btnDefend, btnSpecial, btnEndMission;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_mission_control);
 
-        // selection
         RecyclerView recycler = findViewById(R.id.recyclerCrew);
-        Button btnLaunch = findViewById(R.id.btnLaunch);
-        Button btnToQuarters = findViewById(R.id.btnToQuarters);
+        CardView btnLaunch = findViewById(R.id.btnLaunch);
+        CardView btnToQuarters = findViewById(R.id.btnToQuarters);
         selectionPanel = findViewById(R.id.selectionPanel);
 
-        // combat
         combatPanel = findViewById(R.id.combatPanel);
         textThreat = findViewById(R.id.textThreat);
         textCrewA = findViewById(R.id.textCrewA);
@@ -61,7 +59,6 @@ public class MissionControlActivity extends AppCompatActivity {
 
         btnLaunch.setOnClickListener(v -> launchMission());
         btnToQuarters.setOnClickListener(v -> moveSelectedToQuarters());
-
         btnAttack.setOnClickListener(v -> doAction(MissionManager.Action.ATTACK));
         btnDefend.setOnClickListener(v -> doAction(MissionManager.Action.DEFEND));
         btnSpecial.setOnClickListener(v -> doAction(MissionManager.Action.SPECIAL));
@@ -91,7 +88,6 @@ public class MissionControlActivity extends AppCompatActivity {
         refreshList();
     }
 
-    // start a new mission with 2 selected crew
     private void launchMission() {
         List<CrewMember> selected = adapter.getSelectedCrew();
         if (selected.size() != 2) {
@@ -110,7 +106,6 @@ public class MissionControlActivity extends AppCompatActivity {
         updateCombatUI();
     }
 
-    // process one player action
     private void doAction(MissionManager.Action action) {
         String result = mission.processAction(action);
         textLog.append(result + "\n");
@@ -145,7 +140,6 @@ public class MissionControlActivity extends AppCompatActivity {
         if (mission.getState() == MissionManager.MissionState.VICTORY) {
             Storage.getInstance().incrementMissionsCompleted();
         }
-        // defeated crew go to medbay instead of being removed
         if (!mission.getCrewA().isAlive()) {
             Storage.getInstance().sendToMedbay(mission.getCrewA());
         }
